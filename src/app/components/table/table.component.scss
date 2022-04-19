@@ -1,0 +1,17 @@
+table {
+    border: 10px solid lightblue;
+    td {
+        border: 1px solid black;
+        width: 10px;
+        height: 10px;
+        text-align: center;
+
+        &.filled {
+            background-color: green;
+        }
+
+        &.empty {
+            background-color: lightgray;
+        }
+    }
+}

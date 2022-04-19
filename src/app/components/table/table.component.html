@@ -1,0 +1,7 @@
+<table cellspacing="0">
+    <tr *ngFor="let w of tableHeight; let i = index">
+        <td *ngFor="let w of tableWidth; let j = index" [ngClass]="isFilled(i, j) ? 'filled' : 'empty'">
+            <!-- {{(i+1) + "/" + (j+1)}} -->
+        </td>
+    </tr>
+</table>
