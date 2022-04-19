@@ -7,11 +7,15 @@ import { TableComponent } from './components/table/table.component';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent
+    TableComponent,
+    SettingsComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
