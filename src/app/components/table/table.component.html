@@ -6,4 +6,8 @@
     </tr>
 </table>
 
-<button (click)="init()">Restart</button>
+<div class="button-container">
+    <button (click)="init()">{{isActive ? 'Restart' : 'Start'}}</button>
+    <button (click)="stop()">Stop</button>
+    <p>Génération {{currentGeneration}}</p>
+</div>

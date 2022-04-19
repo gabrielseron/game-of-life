@@ -18,6 +18,10 @@ export class TableComponent implements OnInit {
 
   numberOfCells = 10;
 
+  currentGeneration = 0;
+
+  isActive = false;
+
   constructor(
     private toastr: ToastrService
   ) { }
@@ -29,6 +33,12 @@ export class TableComponent implements OnInit {
   init() {
     this.getLocalStorageLength();
     this.initLivingCells();
+    this.isActive = true;
+    this.currentGeneration = 1;
+  }
+
+  stop() {
+    this.isActive = false;
   }
 
   counter(i: number) {
