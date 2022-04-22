@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { async } from '@angular/core/testing';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -15,12 +16,14 @@ export class TableComponent implements OnInit {
   tableHeight: any;
 
   currentGameArray: any;
+  nextGeneration: any;
 
   numberOfCells = 100;
 
-  currentGeneration = 0;
+  currentGeneration = 1;
 
-  isActive = false;
+
+  gameOfLife: any;
 
   constructor(
     private toastr: ToastrService
@@ -30,15 +33,10 @@ export class TableComponent implements OnInit {
     this.init();
   }
 
-  init() {
+  async init() {
     this.getLocalStorageLength();
-    this.initLivingCells();
-    this.isActive = true;
-    this.currentGeneration = 1;
-  }
-
-  stop() {
-    this.isActive = false;
+    await this.initLivingCells();
+    this.game()
   }
 
   counter(i: number) {
@@ -59,44 +57,75 @@ export class TableComponent implements OnInit {
     this.tableHeight = this.counter(this.defaultHeight);
 
     this.currentGameArray = Array.from(Array(this.defaultWidth), () => new Array(this.defaultHeight));
+    this.nextGeneration = JSON.parse(JSON.stringify(this.currentGameArray));
 
-    this.numberOfCells = (this.defaultWidth * this.defaultHeight)*0.4;
-    // console.log(this.defaultHeight*this.defaultWidth*0.4);
+    for (let i = 0; i < this.defaultWidth; i++) {
+      for (let j = 0; j < this.defaultHeight; j++) {
+        this.currentGameArray[i][j] = {width: i, height: j, activated: false}
+      }
+    }
 
-    // console.log((50 * 50)*0.4);
+    this.numberOfCells = (this.defaultWidth * this.defaultHeight)*0.1;
   }
 
   isFilled(width: number, height: number) {
-    if (this.currentGameArray[width][height])
+    if (this.currentGameArray[width][height].activated)
       return true;
     return false;
   }
 
-  initLivingCells() {
+  async initLivingCells() {
     let cellsToCreate = this.numberOfCells;
-
-    while (cellsToCreate > 0)
-    {
-      const w = Math.floor(Math.random() * this.defaultWidth)
-      const h = Math.floor(Math.random() * this.defaultHeight)
-
-      if (!this.currentGameArray[w][h])
+      while (cellsToCreate > 0)
       {
-        this.currentGameArray[w][h] = true
-        cellsToCreate -= 1;
+        const w = Math.floor(Math.random() * this.defaultWidth)
+        const h = Math.floor(Math.random() * this.defaultHeight)
+  
+        if (this.currentGameArray[w][h].activated === false)
+        {
+          this.currentGameArray[w][h].activated = true
+          cellsToCreate -= 1;
+        }
       }
-
-    }
-
   }
 
   game() {
-    // this.isActive = true;
+    this.currentGeneration = 1;
+    let interval = () => {
+      for (let i = 0; i < this.defaultWidth; i++) {
+        for (let j = 0; j < this.defaultHeight; j++) {
+          this.scanAround(this.currentGameArray[i][j]);
+        }
+      }
+      this.currentGeneration++;
+      this.currentGameArray = this.nextGeneration;
 
-    // while (this.isActive)
-    // {
-      
-    // }
+      setTimeout(interval, 150);
+    }
+
+    interval()
+  }
+
+  scanAround(array: any) {
+    let nbOfAliveAround = 0;
+    for (let i = Math.max(0, array?.width-1); i < Math.min(array?.width+2, this.defaultWidth); i++) {
+      for (let j = Math.max(0, array?.height-1); j <  Math.min(array?.height+2, this.defaultHeight); j++) {
+        if (this.currentGameArray[i][j]?.activated) {
+          nbOfAliveAround++
+        }
+      }
+    }
+
+    if (array.activated)
+      nbOfAliveAround--;
+    if (nbOfAliveAround != 2 && nbOfAliveAround != 3) {
+      this.nextGeneration[array.width][array.height] = {width: array.width, height: array.height, activated: false};
+    } else if(nbOfAliveAround == 3) {
+      this.nextGeneration[array.width][array.height] = {width: array.width, height: array.height, activated: true};
+    } else {
+      this.nextGeneration[array.width][array.height] = {width: array.width, height: array.height, activated: array.activated};
+    }
+
   }
 
 }

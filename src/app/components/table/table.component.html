@@ -1,13 +1,11 @@
 <table cellspacing="0">
-    <tr *ngFor="let w of tableHeight; let i = index">
+    <tr *ngFor="let h of tableHeight; let i = index">
         <td *ngFor="let w of tableWidth; let j = index" [ngClass]="isFilled(i, j) ? 'filled' : 'empty'">
-            <!-- {{(i+1) + "/" + (j+1)}} -->
         </td>
     </tr>
 </table>
 
 <div class="button-container">
-    <button (click)="init()">{{isActive ? 'Restart' : 'Start'}}</button>
-    <button (click)="stop()">Stop</button>
+    <button (click)="init()">Restart</button>
     <p>Génération {{currentGeneration}}</p>
 </div>
