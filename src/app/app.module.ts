@@ -9,13 +9,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { GameComponent } from './pages/game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
     SettingsComponent,
-    SidebarComponent
+    SidebarComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
