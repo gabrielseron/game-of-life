@@ -16,7 +16,7 @@ export class TableComponent implements OnInit {
 
   currentGameArray: any;
 
-  numberOfCells = 10;
+  numberOfCells = 100;
 
   currentGeneration = 0;
 
@@ -60,6 +60,10 @@ export class TableComponent implements OnInit {
 
     this.currentGameArray = Array.from(Array(this.defaultWidth), () => new Array(this.defaultHeight));
 
+    this.numberOfCells = (this.defaultWidth * this.defaultHeight)*0.4;
+    // console.log(this.defaultHeight*this.defaultWidth*0.4);
+
+    // console.log((50 * 50)*0.4);
   }
 
   isFilled(width: number, height: number) {
@@ -69,27 +73,30 @@ export class TableComponent implements OnInit {
   }
 
   initLivingCells() {
-    console.log(this.defaultWidth * this.defaultHeight < this.numberOfCells);
-    if (this.defaultWidth * this.defaultHeight < this.numberOfCells)
-    {
-      this.toastr.error('Cannot generate more cells than the size of the table', 'An error has occured')
-    } else
-    {
-      let cellsToCreate = this.numberOfCells;
+    let cellsToCreate = this.numberOfCells;
 
-      while (cellsToCreate > 0)
+    while (cellsToCreate > 0)
+    {
+      const w = Math.floor(Math.random() * this.defaultWidth)
+      const h = Math.floor(Math.random() * this.defaultHeight)
+
+      if (!this.currentGameArray[w][h])
       {
-        const w = Math.floor(Math.random() * this.defaultWidth)
-        const h = Math.floor(Math.random() * this.defaultHeight)
-  
-        if (w*h > this.numberOfCells && !this.currentGameArray[w][h])
-        {
-          this.currentGameArray[w][h] = true
-          cellsToCreate -= 1;
-          console.log(cellsToCreate, this.numberOfCells);
-        }
+        this.currentGameArray[w][h] = true
+        cellsToCreate -= 1;
       }
+
     }
+
+  }
+
+  game() {
+    // this.isActive = true;
+
+    // while (this.isActive)
+    // {
+      
+    // }
   }
 
 }
