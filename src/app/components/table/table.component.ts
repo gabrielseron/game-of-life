@@ -22,6 +22,7 @@ export class TableComponent implements OnInit {
 
   currentGeneration = 1;
 
+  gameActive = false;
 
   gameOfLife: any;
 
@@ -41,6 +42,14 @@ export class TableComponent implements OnInit {
 
   counter(i: number) {
     return new Array(i);
+  }
+
+  start() {
+    this.gameActive = true
+  }
+
+  stop() {
+    this.gameActive = false
   }
 
   getLocalStorageLength() {
@@ -92,13 +101,15 @@ export class TableComponent implements OnInit {
   game() {
     this.currentGeneration = 1;
     let interval = () => {
-      for (let i = 0; i < this.defaultWidth; i++) {
-        for (let j = 0; j < this.defaultHeight; j++) {
-          this.scanAround(this.currentGameArray[i][j]);
+      if (this.gameActive) {
+        for (let i = 0; i < this.defaultWidth; i++) {
+          for (let j = 0; j < this.defaultHeight; j++) {
+            this.scanAround(this.currentGameArray[i][j]);
+          }
         }
+        this.currentGeneration++;
+        this.currentGameArray = this.nextGeneration;
       }
-      this.currentGeneration++;
-      this.currentGameArray = this.nextGeneration;
 
       setTimeout(interval, 150);
     }

@@ -6,6 +6,7 @@
 </table>
 
 <div class="button-container">
+    <button (click)="gameActive ? stop() : start()">{{gameActive ? 'Stop' : 'Start'}}</button>
     <button (click)="init()">Restart</button>
     <p>Génération {{currentGeneration}}</p>
 </div>
