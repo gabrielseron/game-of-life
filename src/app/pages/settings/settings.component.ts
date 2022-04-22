@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
+  width = 50;
+  height = 50;
+
   constructor() { }
 
   ngOnInit(): void {
