@@ -18,6 +18,17 @@ describe('TableComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
+  it('doit être supérieur à 0', () => {
+    expect(component.defaultHeight > 0);
+});
+it('doit être supérieur à 0', () => {
+  expect(component.defaultWidth > 0);
+});
+it('doit être supérieur à 7', () => {
+  expect(component.defaultWidth + component.defaultWidth >= 7);
+});
+it('doit être supérieur à 0', () => {
+  expect(component.numberOfCells >= 1);
+});
   
 });
