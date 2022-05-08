@@ -1,7 +1,6 @@
 <table cellspacing="0">
     <tr *ngFor="let h of tableHeight; let i = index">
-        <td *ngFor="let w of tableWidth; let j = index" [ngClass]="isFilled(i, j) ? 'filled' : 'empty'">
-        </td>
+        <td *ngFor="let w of tableWidth; let j = index" [ngClass]="isFilled(j, i) ? 'filled' : 'empty'"></td>
     </tr>
 </table>
 
