@@ -17,8 +17,8 @@ export class SettingsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let w  = localStorage.getItem('width');
-    let h  = localStorage.getItem('height');
+    let w = localStorage.getItem('width');
+    let h = localStorage.getItem('height');
     let speed = localStorage.getItem('speed');
 
     if (w !== undefined && typeof w === 'string' && w !=='0')
