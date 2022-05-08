@@ -1,0 +1,36 @@
+.sidebar {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    height: 60%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 40px;
+    padding-left: 10px;
+    background-color: rgb(4, 63, 4);
+}
+    
+
+    
+.body-text {
+    margin-left: 150px;
+    font-size: 18px;
+}
+input{
+    width: 30%;
+    padding: 4px 4px;
+    margin: 9px 9px;
+    box-sizing: border-box;
+}
+.sidebarTitle {
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+.sidebarSubmit {
+    display: flex;
+    justify-content: center;
+}
