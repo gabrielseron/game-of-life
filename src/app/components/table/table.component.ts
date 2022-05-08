@@ -24,6 +24,8 @@ export class TableComponent implements OnInit {
 
   gameOfLife: any;
 
+  speed = 150; //ms
+
   constructor(
   ) { }
 
@@ -32,6 +34,7 @@ export class TableComponent implements OnInit {
   }
 
   async init() {
+    this.gameActive = false;
     await this.getLocalStorageLength();
     await this.initLivingCells();
     this.game();
@@ -52,12 +55,16 @@ export class TableComponent implements OnInit {
   async getLocalStorageLength() {
     let w  = localStorage.getItem('width');
     let h  = localStorage.getItem('height');
+    let speed  = localStorage.getItem('speed');
 
     if (w !== undefined && typeof w === 'string' && w !=='0')
       this.defaultWidth = parseInt(w);
 
-    if (h !== undefined && typeof h === 'string' && w !=='0')
+    if (h !== undefined && typeof h === 'string' && h !=='0')
       this.defaultHeight = parseInt(h);
+
+    if (speed !== undefined && typeof speed === 'string' && speed !=='0')
+      this.speed = parseInt(speed);
 
     this.tableWidth = this.counter(this.defaultWidth);
     this.tableHeight = this.counter(this.defaultHeight);
@@ -110,7 +117,7 @@ export class TableComponent implements OnInit {
         this.currentGameArray = this.nextGeneration;
       }
 
-      setTimeout(interval, 150);
+      setTimeout(interval, this.speed);
     }
 
     interval()
