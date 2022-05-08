@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { async } from '@angular/core/testing';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -37,7 +36,7 @@ export class TableComponent implements OnInit {
   async init() {
     this.getLocalStorageLength();
     await this.initLivingCells();
-    this.game()
+    this.game();
   }
 
   counter(i: number) {
@@ -45,11 +44,11 @@ export class TableComponent implements OnInit {
   }
 
   start() {
-    this.gameActive = true
+    this.gameActive = true;
   }
 
   stop() {
-    this.gameActive = false
+    this.gameActive = false;
   }
 
   getLocalStorageLength() {
@@ -70,7 +69,7 @@ export class TableComponent implements OnInit {
 
     for (let i = 0; i < this.defaultWidth; i++) {
       for (let j = 0; j < this.defaultHeight; j++) {
-        this.currentGameArray[i][j] = {width: i, height: j, activated: false}
+        this.currentGameArray[i][j] = {width: i, height: j, activated: false};
       }
     }
 
@@ -92,7 +91,7 @@ export class TableComponent implements OnInit {
   
         if (this.currentGameArray[w][h].activated === false)
         {
-          this.currentGameArray[w][h].activated = true
+          this.currentGameArray[w][h].activated = true;
           cellsToCreate -= 1;
         }
       }
@@ -122,7 +121,7 @@ export class TableComponent implements OnInit {
     for (let i = Math.max(0, array?.width-1); i < Math.min(array?.width+2, this.defaultWidth); i++) {
       for (let j = Math.max(0, array?.height-1); j <  Math.min(array?.height+2, this.defaultHeight); j++) {
         if (this.currentGameArray[i][j]?.activated) {
-          nbOfAliveAround++
+          nbOfAliveAround++;
         }
       }
     }
