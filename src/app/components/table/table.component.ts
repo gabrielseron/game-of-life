@@ -17,7 +17,7 @@ export class TableComponent implements OnInit {
   currentGameArray: any;
   nextGeneration: any;
 
-  numberOfCells = 100;
+  numberOfCells = 0;
 
   currentGeneration = 1;
 
@@ -55,10 +55,10 @@ export class TableComponent implements OnInit {
     let w  = localStorage.getItem('width');
     let h  = localStorage.getItem('height');
 
-    if (w !== undefined && typeof w === 'string')
+    if (w !== undefined && typeof w === 'string' && w !=='0')
       this.defaultWidth = parseInt(w);
 
-    if (h !== undefined && typeof h === 'string')
+    if (h !== undefined && typeof h === 'string' && w !=='0')
       this.defaultHeight = parseInt(h);
 
     this.tableWidth = this.counter(this.defaultWidth);
