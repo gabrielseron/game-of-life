@@ -53,9 +53,9 @@ export class TableComponent implements OnInit {
   }
 
   async getLocalStorageLength() {
-    let w  = localStorage.getItem('width');
-    let h  = localStorage.getItem('height');
-    let speed  = localStorage.getItem('speed');
+    let w = localStorage.getItem('width');
+    let h = localStorage.getItem('height');
+    let speed = localStorage.getItem('speed');
 
     if (w !== undefined && typeof w === 'string' && w !=='0')
       this.defaultWidth = parseInt(w);
