@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-table',
@@ -26,7 +25,6 @@ export class TableComponent implements OnInit {
   gameOfLife: any;
 
   constructor(
-    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +32,7 @@ export class TableComponent implements OnInit {
   }
 
   async init() {
-    this.getLocalStorageLength();
+    await this.getLocalStorageLength();
     await this.initLivingCells();
     this.game();
   }
@@ -51,7 +49,7 @@ export class TableComponent implements OnInit {
     this.gameActive = false;
   }
 
-  getLocalStorageLength() {
+  async getLocalStorageLength() {
     let w  = localStorage.getItem('width');
     let h  = localStorage.getItem('height');
 
@@ -65,7 +63,7 @@ export class TableComponent implements OnInit {
     this.tableHeight = this.counter(this.defaultHeight);
 
     this.currentGameArray = Array.from(Array(this.defaultWidth), () => new Array(this.defaultHeight));
-    this.nextGeneration = JSON.parse(JSON.stringify(this.currentGameArray));
+    this.nextGeneration = await JSON.parse(JSON.stringify(this.currentGameArray));
 
     for (let i = 0; i < this.defaultWidth; i++) {
       for (let j = 0; j < this.defaultHeight; j++) {
@@ -73,12 +71,14 @@ export class TableComponent implements OnInit {
       }
     }
 
-    this.numberOfCells = (this.defaultWidth * this.defaultHeight)*0.1;
+    this.numberOfCells = (this.defaultWidth * this.defaultHeight)*0.15;
   }
 
   isFilled(width: number, height: number) {
-    if (this.currentGameArray[width][height].activated)
-      return true;
+    if(this.currentGameArray[width] !== undefined && this.currentGameArray[width][height] !== undefined) {
+      if (this.currentGameArray[width][height].activated)
+        return true;
+    }
     return false;
   }
 
@@ -88,7 +88,7 @@ export class TableComponent implements OnInit {
       {
         const w = Math.floor(Math.random() * this.defaultWidth)
         const h = Math.floor(Math.random() * this.defaultHeight)
-  
+
         if (this.currentGameArray[w][h].activated === false)
         {
           this.currentGameArray[w][h].activated = true;
